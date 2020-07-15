@@ -1,6 +1,7 @@
 {  
   "engines": {
-    "node": "12.18.2"
+    "node": "12.18.2",
+    "npm": "6.14.5"
   },
   "requires": true,
   "lockfileVersion": 1,
