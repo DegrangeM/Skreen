@@ -15,9 +15,8 @@ L'application est codé en NodeJs est néecessite donc d'être hebergée sur un 
 - Créer son compte et valider son adresse email
 
 - Une fois arrivé sur l'écran ci-dessous :
-
-<img src="https://user-images.githubusercontent.com/53106394/87570968-a8be6e80-c6c9-11ea-915d-94f68ea553cb.png" height="250" />
-
+  
+  <img src="https://user-images.githubusercontent.com/53106394/87570968-a8be6e80-c6c9-11ea-915d-94f68ea553cb.png" height="250" />
 
    - Saisir le nom de votre choix pour l'application (minuscules, chiffres et tiret uniquement) : attention ce nom aura une influence sur l'adresse URL de l'application
    
@@ -38,14 +37,24 @@ L'application est codé en NodeJs est néecessite donc d'être hebergée sur un 
    - Rajouter à la fin de l'adresse url `/teacher.html#XXXXX`en remplaçant XXXXX par le mot de passe enseignant copié précédemment.
      Par exemple, si l'adresse de votre application est `https://skreen.herokuapp.com/` et que votre TEACHER_PASSWORD est `797c59a0a173b2d28d2417801c252002fa8a59758944fdb9fc5321e5eda03288` il faut se rendre à l'adresse `https://skreen.herokuapp.com/teacher.html#797c59a0a173b2d28d2417801c252002fa8a59758944fdb9fc5321e5eda03288`.
      
-- Vous avez désormais accès à l'interface prof ! Sauvegardez cette adresse url dans votre marque page et ne donnez ce lien à personne !
+- Vous avez désormais accès à l'interface professeur ! Sauvegardez cette adresse url dans votre marque page et ne donnez ce lien à personne !
 
 Remarque : votre application pourra être utilisé gratuitement 550 heures par mois. L'application s'éteignant automatiquement au bout de 30 minutes de nons utilisation. Même avec une utilisation quotidienne vous ne dépasserez donc jamais ce quotat.
 
 ## Utilisation
 
-- Rendez-vous sur l'interface prof (si l'interface prof ne s'affiche pas, patientez 1 minute puis réactualisez : l'application est en veille est à besoin d'un peu de temps pour se relancer)
+- Rendez-vous sur l'interface professeur (si l'interface prof ne s'affiche pas, patientez 1 minute puis réactualisez : l'application est en veille est à besoin d'un peu de temps pour se relancer)
 
-- Cliquez sur le bouton Créer lien, saisissez le nom de l'élève par exemple `Pierre Dupont (3B)` puis validez. Un lien s'affiche : demandez alors à l'élève en question d'accéder à ce lien (en lui envoyant le lien par email par exemple). Faites de même pour chacun de vos élèves.
+- Cliquez sur le bouton Créer lien, saisissez le nom de l'élève par exemple `Pierre Dupont (3B)` puis validez. Un lien s'affiche : demandez alors à l'élève en question d'accéder à ce lien (en lui envoyant le lien par email par exemple). Faites de même pour chacun de vos élèves. Il est conseillé de demandé aux élèves d'enregistrer le lien dans leur marque-page pour pouvoir y accéder plus rapidement.
 
-- L'élève arrive alors sur une page où on lui demande de cliquer pour partager son écran.
+- L'élève arrive alors sur une page où on lui demande de cliquer pour partager son écran. Après un clic, le navigateur internet lui demande ce qu'il souhaite partager.
+
+    - Sous Chrome :
+
+      L'écran de l'ordinateur s'affiche alors en petit. Il suffit de cliquer dessus puis de cliquer sur le bouton "Partager".
+      
+    - Sous Firefox :
+    
+      Dans la liste déroulante, choisir "Écran entier" tout en bas puis cliquer sur autoriser.
+      
+- Le fond de la page web devient alors vert et l'élève voit alors son propre écran. Cela signifie que tout est bon et vous devriez maintenant voir son écran sur l'interface professeur.
