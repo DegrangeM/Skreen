@@ -43,23 +43,29 @@
 	  audio: false
 	};
 	
-	async function startCapture() {
-		videoElem = document.getElementById('video');
+	var started = false;
 	
-		videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+	async function startCapture() {
+	
+		if (!started) {
+			videoElem = document.getElementById('video');
 		
-		const videoTrack = videoElem.srcObject.getVideoTracks()[0];
-	 
-		if(videoTrack.getSettings().displaySurface !== "monitor") {
-			alert("Vous devez choisir de partager l'écran en entier et non pas juste une fenêtre / application / onglet.");
-			location.reload();
-		}
-		else {
-			document.body.style.background = 'green';
-			srcH = videoElem.srcObject.getVideoTracks()[0].getSettings().height;
-			srcW = videoElem.srcObject.getVideoTracks()[0].getSettings().width;
+			videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+			
+			const videoTrack = videoElem.srcObject.getVideoTracks()[0];
+		 
+			if(videoTrack.getSettings().displaySurface !== "monitor") {
+				alert("Vous devez choisir de partager l'écran en entier et non pas juste une fenêtre / application / onglet.");
+				location.reload();
+			}
+			else {
+				document.body.style.background = 'green';
+				srcH = videoElem.srcObject.getVideoTracks()[0].getSettings().height;
+				srcW = videoElem.srcObject.getVideoTracks()[0].getSettings().width;
 
-			setInterval(takepicture,2000);
+				setInterval(takepicture,2000);
+				started = true;
+			}
 		}
 	}
 
