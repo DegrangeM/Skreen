@@ -29,7 +29,7 @@ http.listen(PORT, () => {
 
 io.on('connect', socket => {
 	socket.on('teacher', (pw, fn) => {
-		if(pw === undefined || fn === undefined) return;
+		if(pw !== 'string' || typeof fn !== 'function')
 		if(pw.substr(1) == TEACHER_PASSWORD) {
 			socket.join('teacher');
 			socket.to('student').emit('who');
@@ -42,7 +42,7 @@ io.on('connect', socket => {
 		}
 	});
 	socket.on('student', (data, fn) => {
-		if(data === undefined || fn === undefined) return;
+		if(typeof data !== 'string' || typeof fn !== 'function') return;
 		let datas = data.substr(1).split('/');
 		let name = decodeURIComponent(datas[0]);
 		let hash = datas[1];

@@ -20,6 +20,7 @@
 		font-size:500%;
 		margin: auto;
 		cursor: pointer;
+		text-align: center;
 	}
 	
 	html, body {
@@ -61,7 +62,10 @@
 		if (!started) {
 			videoElem = document.getElementById('video');
 		
-			videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+			videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions).catch((e) => {
+				alert('Erreur');
+				location.reload();
+			});
 			
 			const videoTrack = videoElem.srcObject.getVideoTracks()[0];
 		 
@@ -120,6 +124,9 @@
 			socket.emit('student', location.hash, function(r){
 				if(r) {
 					startCapture();
+				} else {
+					alert("Erreur d'authentification. Il y a une faute de frappe dans le lien élève.");
+					location.reload();
 				}
 			});
 		});
@@ -128,7 +135,12 @@
 			socket.emit('here');
 		});
 	}
-
+	
+	/*
+	window.onhashchange = function() { // on actualise la page afin de prendre en compte le nouveau lien
+		location.reload();
+	};
+	*/
 
     </script>
 </body>
