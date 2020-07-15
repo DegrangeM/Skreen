@@ -2,5 +2,6 @@ TODO :
 - AFK ?
 - tri par nom ?
 - zoom général ?
-- zoom sur un écran ?
+- meilleur zoom sur un écran ?
 - chiffrement des flux ?
+- test afk coté client ?
