@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Skreen</title>
+</head>
+<body>
+	<video id="video" autoplay></video>
+	
+	<style>
+	body {
+		display: flex;
+		background-color: red;
+	}
+	
+	html, body {
+		height: 100%;
+		margin: 0px;
+	}
+	
+	#canvas {
+		display: none;
+		margin: auto;
+	}
+	#video {
+		margin: auto;
+		max-height: 8Ovh;
+		max-width: 80vw;
+	}
+	</style>
+
+	<canvas id="canvas"></canvas>  
+
+    <ul id="events"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+	
+	var displayMediaOptions = {
+	  video: {
+		cursor: "always"
+	  },
+	  audio: false
+	};
+	
+	async function startCapture() {
+		videoElem = document.getElementById('video');
+	
+		videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+		
+		const videoTrack = videoElem.srcObject.getVideoTracks()[0];
+	 
+		if(videoTrack.getSettings().displaySurface !== "monitor") {
+			alert("Vous devez choisir de partager l'écran en entier et non pas juste une fenêtre / application / onglet.");
+			location.reload();
+		}
+		else {
+			document.body.style.background = 'green';
+			srcH = videoElem.srcObject.getVideoTracks()[0].getSettings().height;
+			srcW = videoElem.srcObject.getVideoTracks()[0].getSettings().width;
+
+			setInterval(takepicture,2000);
+		}
+	}
+
+	canvas = document.getElementById('canvas');
+
+	function takepicture() {
+		var context = canvas.getContext('2d');
+		// le plus grand fait 1000, l'autre s'adapte.
+	
+		outH = parseInt(srcH * 1000/Math.max(srcH,srcW));
+		outW = parseInt(srcW * 1000/Math.max(srcH,srcW));
+
+		canvas.width = outW;
+		canvas.height = outH;
+		//canvas.style.visibility = 'hidden'; // On évite les boucles
+		//setTimeout(function(){
+		context.drawImage(videoElem, 0, 0, outW, outH);
+		//canvas.style.visibility = 'visible';
+
+		if(videoElem.srcObject.active) {
+			var data = canvas.toDataURL('image/png');
+			socket.emit('screenshot', data);
+		} else {
+			document.body.style.background = 'red';
+			location.reload();
+		}
+		//}, 50);
+
+	}
+
+	
+		const socket = io();
+
+		socket.on('connect', () => {
+			socket.emit('student', location.hash, function(r){
+				if(r) {
+					startCapture();
+				}
+			});
+		});
+		
+		socket.on('who', () => {
+			socket.emit('here');
+		});
+
+
+    </script>
+</body>
+</html>

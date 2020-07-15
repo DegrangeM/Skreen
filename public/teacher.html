@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Skreen</title>
+</head>
+<body>
+	<style>
+	#screens {
+		display: flex;
+	}
+	#screens > div {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		min-width: 25vw;
+		min-height: 25vh;
+		justify-content: space-between;
+	}
+	#screens img {
+		max-width:25vw;
+		max-height:25vh;
+		object-fit: contain;
+	}
+	</style>
+	<input type="button" id="createLink" value="Créer lien" /><br />
+	
+    <div id="screens" style="display:flex;"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+ 
+		
+		const socket = io();
+		
+		socket.on('connect', () => {
+			socket.emit('teacher', location.hash, function(r) {
+				if(!r) {
+					alert('Mauvais mot de passe !');
+				}
+			});
+		});
+		
+		socket.on('screenshot', (id, src) => {
+			/*if (!document.getElementById('screen-'+id)) {
+				let screen = document.createElement('img');
+				screen.setAttribute('id', 'screen-'+id);
+				document.getElementById('screens').appendChild(screen);
+			}*/
+			if (document.getElementById('screen-'+id)) {
+				/* if(document.getElementById('screen-'+id).getElementsByTagName('img')[0].src != src) {
+					document.getElementById('screen-'+id).setAttribute('data-afk', new Date().getTime());
+				} */
+				document.getElementById('screen-'+id).getElementsByTagName('img')[0].src = src;
+				document.getElementById('screen-'+id).setAttribute('data-time', new Date().getTime());
+			}
+		});
+		
+		function createScreenDiv(id, name) {
+			if (!document.getElementById('screen-'+id)) {
+				let screenDiv = document.createElement('div');
+				screenDiv.setAttribute('id', 'screen-'+id);
+				let screen = document.createElement('img');
+				let screenName = document.createElement('span');
+				screenName.textContent = name;
+				screenDiv.appendChild(screen);
+				screenDiv.appendChild(screenName);
+				document.getElementById('screens').appendChild(screenDiv);
+			}
+		}
+		
+		socket.on('student-connect', createScreenDiv);
+		socket.on('here', createScreenDiv);
+		
+		socket.on('student-disconnect', (id, src) => {
+			if (document.getElementById('screen-'+id)) {
+				document.getElementById('screen-'+id).remove(); // vanilla JS
+			}
+		});
+		
+		document.getElementById('createLink').addEventListener('click', function() {
+			let name = prompt("Nom de l'élève ?",'');
+			socket.emit('create-link', name, function(r){
+			let hashIndex = location.href.indexOf('#');
+			let URL = hashIndex == -1 ? location.href.substr(0, location.href.length - 12) : location.href.substr(0, hashIndex - 12); // 12 = "teacher.html".length
+				prompt('Lien à donner :', URL + "student.html#" + /*encodeURIComponent*/(name) + "/" + r);
+			});
+		});
+
+		setInterval(function(){ // On affiche en rouge les clients connectés qui n'ont pas envoyés de nouveaux screenshots
+			document.querySelectorAll('#screens > div').forEach(function(s){
+				if (s.getAttribute('data-time') && s.getAttribute('data-time') < new Date().getTime() - 8000) {
+					s.style.background = 'red';
+				} else {
+					s.style.background = null;
+				}
+			});
+		},10000);
+		
+    </script>
+</body>
+</html>
