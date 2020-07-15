@@ -45,6 +45,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
 	
+	var socket;
+	
 	var displayMediaOptions = {
 	  video: {
 		cursor: "always"
@@ -112,7 +114,7 @@
 		document.getElementById('clicktext').style.display = 'none';
 		document.getElementById('video').style.display = 'inline';
 	
-		const socket = io();
+		socket = io();
 
 		socket.on('connect', () => {
 			socket.emit('student', location.hash, function(r){
