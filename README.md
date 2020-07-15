@@ -39,7 +39,7 @@ L'application est codé en NodeJs est néecessite donc d'être hebergée sur un 
      
 - Vous avez désormais accès à l'interface professeur ! Sauvegardez cette adresse url dans votre marque page et ne donnez ce lien à personne !
 
-Remarque : votre application pourra être utilisé gratuitement 550 heures par mois. L'application s'éteignant automatiquement au bout de 30 minutes de nons utilisation. Même avec une utilisation quotidienne vous ne dépasserez donc jamais ce quotat.
+Remarque : votre application pourra être utilisé gratuitement 550 heures par mois. L'application s'éteignant automatiquement au bout de 30 minutes de non utilisation. Même avec une utilisation quotidienne vous ne dépasserez donc jamais ce quotat.
 
 ## Utilisation
 
@@ -57,4 +57,4 @@ Remarque : votre application pourra être utilisé gratuitement 550 heures par m
     
       Dans la liste déroulante, choisir "Écran entier" tout en bas puis cliquer sur autoriser.
       
-- Le fond de la page web devient alors vert et l'élève voit alors son propre écran. Cela signifie que tout est bon et vous devriez maintenant voir son écran sur l'interface professeur.
+- Le fond de la page web devient alors vert et l'élève voit son propre écran. Cela signifie que tout est bon et vous devriez maintenant voir son écran sur l'interface professeur.
