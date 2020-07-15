@@ -1,4 +1,7 @@
 {
+	"engines": {
+		"node": "12.18.2"
+	},
 	"buildpacks": [
 		{
 			"url": "heroku/nodejs"
