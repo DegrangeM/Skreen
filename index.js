@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 const SALT = process.env.SALT === undefined ? '2j3dWJRwFkG3v3U9' : process.env.SALT;
 const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? 'N7ykH8SMA8pvz4F5' : process.env.TEACHER_PASSWORD;
-const PORT = process.env.PORT === undefined ? 300 : process.env.PORT;
+const PORT = process.env.PORT === undefined ? 3000 : process.env.PORT;
 
 /*
 app.get('/', (req, res) => {

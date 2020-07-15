@@ -5,12 +5,21 @@
     <title>Skreen</title>
 </head>
 <body>
+
+	<div id="clicktext">Cliquer ici pour partager votre écran</div>
+
 	<video id="video" autoplay></video>
 	
 	<style>
 	body {
 		display: flex;
 		background-color: red;
+	}
+	
+	#clicktext {
+		font-size:500%;
+		margin: auto;
+		cursor: pointer;
 	}
 	
 	html, body {
@@ -23,6 +32,7 @@
 		margin: auto;
 	}
 	#video {
+		display: none;
 		margin: auto;
 		max-height: 8Ovh;
 		max-width: 80vw;
@@ -31,7 +41,6 @@
 
 	<canvas id="canvas"></canvas>  
 
-    <ul id="events"></ul>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -54,7 +63,7 @@
 			
 			const videoTrack = videoElem.srcObject.getVideoTracks()[0];
 		 
-			if(videoTrack.getSettings().displaySurface !== "monitor") {
+			if(videoTrack.getSettings().displaySurface !== "monitor" && videoTrack.label !== "Primary Monitor") {
 				alert("Vous devez choisir de partager l'écran en entier et non pas juste une fenêtre / application / onglet.");
 				location.reload();
 			}
@@ -95,7 +104,13 @@
 		//}, 50);
 
 	}
+	
+	document.body.addEventListener('click', connect);
 
+	function connect() {
+		document.body.removeEventListener('click', connect);
+		document.getElementById('clicktext').style.display = 'none';
+		document.getElementById('video').style.display = 'inline';
 	
 		const socket = io();
 
@@ -110,6 +125,7 @@
 		socket.on('who', () => {
 			socket.emit('here');
 		});
+	}
 
 
     </script>
