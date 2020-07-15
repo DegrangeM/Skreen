@@ -61,3 +61,11 @@ Remarque : votre application pourra être utilisé gratuitement 550 heures par m
       Dans la liste déroulante, choisir "Écran entier" tout en bas puis cliquer sur autoriser.
       
 - Le fond de la page web devient alors vert et l'élève voit son propre écran. Cela signifie que tout est bon et vous devriez maintenant voir son écran sur l'interface professeur.
+
+## Remarques
+
+- Vous pouvez maintenir le clic gauche enfoncé sur l'image de l'écran d'un élève afin d'en voir une version légèrement plus grande.
+
+- Si vous avez mis un espace ou des caractères spéciaux dans le nom de l'élève, il est possible que le lien ne soit pas correctement détecté par le logiciel de messagerie. Faites le lien manuellement via le bouton de mise en forme ou ne mettez pas d'espèces / caractères spéciaux dans le nom des élèves.
+
+- Vous pouvez héberger manuellement l'application en dehors de Heroku si vous en avez les compétences. Votre serveur devra avoir nodejs d'installé et l'application pourra être lancée par la commande `node index.js`. Pensez à téléchager les modules avec `npm install` et à changer les valeurs par défaut de `SALT`et `TEACHER_PASSWORD` dans le fichier `index.js`. Pensez à changer le port (3000 par défaut) si besoin.
