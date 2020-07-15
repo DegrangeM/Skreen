@@ -6,8 +6,9 @@ const crypto = require('crypto');
 
 app.use(express.static('public'));
 
-const SALT = '2j3dWJRwFkG3v3U9';
-const TEACHER_PASSWORD = 'N7ykH8SMA8pvz4F5';
+const SALT = process.env.SALT === undefined ? '2j3dWJRwFkG3v3U9' : process.env.SALT;
+const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? 'N7ykH8SMA8pvz4F5' : process.env.TEACHER_PASSWORD;
+const PORT = process.env.PORT === undefined ? 300 : process.env.PORT;
 
 /*
 app.get('/', (req, res) => {
@@ -21,7 +22,7 @@ app.get('/student', (req, res) => {
 });
 */
 
-http.listen(3000, () => {
+http.listen(PORT, () => {
   console.log('go to http://localhost:3000');
 });
 
