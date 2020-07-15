@@ -3,5 +3,15 @@
 		{
 			"url": "heroku/nodejs"
 		}
-	]
+	],
+	"env": {
+		"SALT": {
+		  "description": "Une clef aléatoire permettant de vérifier l'identité des élèves.",
+		  "generator": "secret"
+		},
+		"TEACHER_PASSWORD": {
+		  "description": "Mot de passe pour accéder à l'interface prof.",
+		  "generator": "secret"
+		}
+	}
 }
