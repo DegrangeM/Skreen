@@ -6,6 +6,9 @@ L'application a cependant besoin d'être hébergé sur une internet afin que l'e
 L'enseignant ne peut accéder aux écrans de ses élèves que lorsque ces derniers ont la page web de Skreen ouverte et peuvent donc cesser à tout moment la diffusion.
 L'enseignant ne peut donc pas accéder aux écrans de ses élèves à leur insu.
 
+![image](https://user-images.githubusercontent.com/53106394/87574631-effb2e00-c6ce-11ea-8263-2402b548a964.png)
+
+
 ## Hébergement de l'application sur internet
 
 L'application est codé en NodeJs est néecessite donc d'être hebergée sur un serveur. Il est possible d'héberger gratuitement et facilement l'application en suivant ces étapes :
