@@ -36,6 +36,9 @@ io.on('connect', socket => {
 			socket.on('create-link', (data, fn) => {
 				fn(crypto.createHmac('sha256', SALT).update(data).digest('hex').substr(0,5));
 			});
+			socket.on('highQuality', (id, b) => {
+				socket.to(id).emit('highQuality', b);
+			})
 			fn(true);
 		} else {
 			fn(false);
