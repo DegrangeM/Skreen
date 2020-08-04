@@ -56,7 +56,8 @@
 	};
 	
 	var started = false;
-	
+	var highQuality = false;
+
 	async function startCapture() {
 	
 		if (!started) {
@@ -88,13 +89,17 @@
 
 	function takepicture() {
 		var context = canvas.getContext('2d');
-		// le plus grand fait 1000, l'autre s'adapte.
-	
-		outH = parseInt(srcH * 1000/Math.max(srcH,srcW));
-		outW = parseInt(srcW * 1000/Math.max(srcH,srcW));
 
-		canvas.width = outW;
-		canvas.height = outH;
+		if(highQuality) {
+			outH = srcH;
+			outW = srcW;
+		} else { // le plus grand fait 1000, l'autre s'adapte.
+			outH = parseInt(srcH * 1000/Math.max(srcH,srcW));
+			outW = parseInt(srcW * 1000/Math.max(srcH,srcW));
+		}
+			
+			canvas.width = outW;
+			canvas.height = outH;
 		//canvas.style.visibility = 'hidden'; // On évite les boucles
 		//setTimeout(function(){
 		context.drawImage(videoElem, 0, 0, outW, outH);
@@ -133,6 +138,9 @@
 		
 		socket.on('who', () => {
 			socket.emit('here');
+		});
+		socket.on('highQuality', (b) => {
+			highQuality = b;
 		});
 	}
 	
