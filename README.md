@@ -68,7 +68,7 @@ Remarque : votre application pourra être utilisé gratuitement 550 heures par m
 
 ## Remarques
 
-- Vous pouvez maintenir le clic gauche enfoncé sur l'image de l'écran d'un élève afin d'en voir une version légèrement plus grande.
+- Vous pouvez maintenir le clic gauche enfoncé sur l'image de l'écran d'un élève afin d'en voir une version légèrement plus grande. Le clic droit permet d'augmenter grandement la qualité de l'image tant que vous le maintenez.
 
 - Si vous avez mis un espace ou des caractères spéciaux dans le nom de l'élève, il est possible que le lien ne soit pas correctement détecté par le logiciel de messagerie. Faites le lien manuellement via le bouton de mise en forme ou ne mettez pas d'espèces / caractères spéciaux dans le nom des élèves.
 
