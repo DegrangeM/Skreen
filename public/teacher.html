@@ -96,7 +96,23 @@
 				screenDiv.appendChild(screen);
 				screenDiv.appendChild(screenName);
 				document.getElementById('screens').appendChild(screenDiv);
+				sortScreen();
 			}
+		}
+
+		function sortScreen() {
+			let screens = document.querySelectorAll('#screens > div'); // Conserver un tableau pour éviter des appels DOM à chaque fois ?
+			let screenObj = [];
+			screens.forEach(function(v){
+				screenObj.push({
+					id: v.getAttribute('id'),
+					name: v.getElementsByTagName('span')[0].innerHTML.toLowerCase()
+				});
+			});
+			screenObj.sort((a,b) => a.name.localeCompare(b.name));
+			screenObj.forEach(function(v, i) {
+				document.getElementById(v.id).style.order = i;
+			});
 		}
 		
 		socket.on('student-connect', createScreenDiv);
@@ -105,6 +121,7 @@
 		socket.on('student-disconnect', (id, src) => {
 			if (document.getElementById('screen-'+id)) {
 				document.getElementById('screen-'+id).remove(); // vanilla JS
+				sortScreen();
 			}
 		});
 		
