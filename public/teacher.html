@@ -63,9 +63,11 @@
 			}*/
 			if (document.getElementById('screen-'+id)) {
 				/* if(document.getElementById('screen-'+id).getElementsByTagName('img')[0].src != src) {
-					document.getElementById('screen-'+id).setAttribute('data-afk', new Date().getTime());
 				} */
-				document.getElementById('screen-'+id).getElementsByTagName('img')[0].src = src;
+				if(src != 'afk') {
+					document.getElementById('screen-'+id).getElementsByTagName('img')[0].src = src;
+					document.getElementById('screen-'+id).setAttribute('data-afk', new Date().getTime());
+				}
 				document.getElementById('screen-'+id).setAttribute('data-time', new Date().getTime());
 			}
 		});

@@ -57,6 +57,7 @@
 	
 	var started = false;
 	var highQuality = false;
+	var lastScreen = '';
 
 	async function startCapture() {
 	
@@ -107,7 +108,12 @@
 
 		if(videoElem.srcObject.active) {
 			var data = canvas.toDataURL('image/png');
-			socket.emit('screenshot', data);
+			if(data != lastScreen) {
+				lastScreen = data;
+				socket.emit('screenshot', data);
+			} else {
+				socket.emit('screenshot', 'afk');
+			}
 		} else {
 			document.body.style.background = 'red';
 			location.reload();
