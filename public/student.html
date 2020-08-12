@@ -71,7 +71,7 @@
 			
 			const videoTrack = videoElem.srcObject.getVideoTracks()[0];
 		 
-			if(videoTrack.getSettings().displaySurface !== "monitor" && videoTrack.label !== "Primary Monitor") {
+			if(videoTrack.getSettings().displaySurface !== "monitor" && videoTrack.label !== "Primary Monitor" && false) {
 				alert("Vous devez choisir de partager l'écran en entier et non pas juste une fenêtre / application / onglet.");
 				location.reload();
 			}
