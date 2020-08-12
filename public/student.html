@@ -143,6 +143,7 @@
 		});
 		
 		socket.on('who', () => {
+			lastScreen = '';
 			socket.emit('here');
 		});
 		socket.on('highQuality', (b) => {

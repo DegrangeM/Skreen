@@ -24,6 +24,12 @@
 		min-height: 25vh;
 		justify-content: space-between;
 	}
+	#screens > div.afk {
+		opacity:0.25;
+	}
+	#screens > div.afk:hover {
+		opacity:1;
+	}
 	#screens img {
 		max-width:25vw;
 		max-height:25vh;
@@ -61,14 +67,30 @@
 				screen.setAttribute('id', 'screen-'+id);
 				document.getElementById('screens').appendChild(screen);
 			}*/
-			if (document.getElementById('screen-'+id)) {
+			let screen = document.getElementById('screen-'+id);
+			if (screen) {
 				/* if(document.getElementById('screen-'+id).getElementsByTagName('img')[0].src != src) {
 				} */
 				if(src != 'afk') {
-					document.getElementById('screen-'+id).getElementsByTagName('img')[0].src = src;
-					document.getElementById('screen-'+id).setAttribute('data-afk', new Date().getTime());
+					screen.getElementsByTagName('img')[0].src = src;
+					screen.setAttribute('data-afk', new Date().getTime());
+					screen.querySelector('span>span').innerHTML = '';
+					if(screen.classList.contains('afk')) {
+						screen.style.order = parseInt(screen.style.order) - 1000;
+					}
+				} else {
+					let diff = new Date().getTime() - parseInt(screen.getAttribute('data-afk'));
+					if(diff > 30000) {
+						screen.querySelector('span>span').innerHTML = ' (' + parseTime(diff / 1000) + ')';
+						if(diff > 120000) {
+							if(!screen.classList.contains('afk')) {
+								screen.classList.add('afk');
+								screen.style.order = parseInt(screen.style.order) + 10000;
+							}
+						}
+					}
 				}
-				document.getElementById('screen-'+id).setAttribute('data-time', new Date().getTime());
+				screen.setAttribute('data-time', new Date().getTime());
 			}
 		});
 		
@@ -76,6 +98,8 @@
 			if (!document.getElementById('screen-'+id)) {
 				let screenDiv = document.createElement('div');
 				screenDiv.setAttribute('id', 'screen-'+id);
+				screenDiv.setAttribute('data-time', new Date().getTime());
+				screenDiv.setAttribute('data-afk', new Date().getTime());
 				let screen = document.createElement('img');
 				screen.addEventListener('mousedown', function(e) {
 					if(e.button==2) {
@@ -93,10 +117,22 @@
 				screen.setAttribute('draggable', 'false');
 				let screenName = document.createElement('span');
 				screenName.textContent = name;
+				let screenAfk = document.createElement('span');
 				screenDiv.appendChild(screen);
+				screenName.appendChild(screenAfk);
 				screenDiv.appendChild(screenName);
 				document.getElementById('screens').appendChild(screenDiv);
 				sortScreen();
+			}
+		}
+
+		function parseTime(t) {
+			if (t < 60) {
+				return Math.floor(t) + 's';
+			} else if (t < 60*60) {
+				return Math.floor(t / 60) + 'm'; 
+			} else {
+				return Math.floor(t / 60 / 60) + 'h';
 			}
 		}
 
