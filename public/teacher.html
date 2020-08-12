@@ -24,6 +24,12 @@
 		min-height: 25vh;
 		justify-content: space-between;
 	}
+	#screens > div.afk {
+		opacity:0.25;
+	}
+	#screens > div.afk:hover {
+		opacity:1;
+	}
 	#screens img {
 		max-width:25vw;
 		max-height:25vh;
@@ -69,16 +75,16 @@
 					screen.getElementsByTagName('img')[0].src = src;
 					screen.setAttribute('data-afk', new Date().getTime());
 					screen.querySelector('span>span').innerHTML = '';
-					if(screen.getAttribute('data-isafk') === 'true') {
+					if(screen.classList.contains('afk')) {
 						screen.style.order = parseInt(screen.style.order) - 1000;
 					}
 				} else {
 					let diff = new Date().getTime() - parseInt(screen.getAttribute('data-afk'));
-					if(diff > 3000) {
+					if(diff > 30000) {
 						screen.querySelector('span>span').innerHTML = ' (' + parseTime(diff / 1000) + ')';
-						if(diff > 12000) {
-							if(screen.getAttribute('data-isafk') !== 'true') {
-								screen.setAttribute('data-isafk', 'true');
+						if(diff > 120000) {
+							if(!screen.classList.contains('afk')) {
+								screen.classList.add('afk');
 								screen.style.order = parseInt(screen.style.order) + 10000;
 							}
 						}
