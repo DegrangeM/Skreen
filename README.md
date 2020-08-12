@@ -4,7 +4,7 @@ Skreen est une application qui permet à un enseignant de voir les écrans de se
 
 Skreen est une application web qui ne nécessite donc aucune installation que ce soit sur l'ordinateur de l'enseignant ou des élèves.
 
-L'application a cependant besoin d'être hébergé sur une internet afin que l'enseignant et les élèves puissent y accéder via leur navigateur internet.
+L'application a cependant besoin d'être hébergé sur internet afin que l'enseignant et les élèves puissent y accéder via leur navigateur internet.
 
 L'enseignant ne peut accéder aux écrans de ses élèves que lorsque ces derniers ont la page web de Skreen ouverte et peuvent donc cesser à tout moment la diffusion.
 
