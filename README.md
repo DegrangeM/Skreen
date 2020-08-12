@@ -72,4 +72,6 @@ Remarque : votre application pourra être utilisé gratuitement 550 heures par m
 
 - Si vous avez mis un espace ou des caractères spéciaux dans le nom de l'élève, il est possible que le lien ne soit pas correctement détecté par le logiciel de messagerie. Faites le lien manuellement via le bouton de mise en forme ou ne mettez pas d'espèces / caractères spéciaux dans le nom des élèves.
 
+- Lorsque l'élève est inactif (c'est à dire que l'écran de l'élève n'a pas changé) depuis 2 minutes, son écran est placé en fin de la liste et est grisé. De plus, dès 30s d'inactivité, un chronomètre s'affiche pour indiquer depuis combien de temps l'élève est inactif.
+
 - Vous pouvez héberger manuellement l'application en dehors de Heroku si vous en avez les compétences. Votre serveur devra avoir nodejs d'installé et l'application pourra être lancée par la commande `node index.js`. Pensez à téléchager les modules avec `npm install` et à changer les valeurs par défaut de `SALT`et `TEACHER_PASSWORD` dans le fichier `index.js`. Pensez à changer le port (3000 par défaut) si besoin.
