@@ -29,14 +29,16 @@ http.listen(PORT, () => {
 
 io.on('connect', socket => {
 	socket.on('teacher', (pw, fn) => {
-		if(pw !== 'string' || typeof fn !== 'function')
+		if(typeof pw !== 'string' || typeof fn !== 'function') return;
 		if(pw.substr(1) == TEACHER_PASSWORD) {
 			socket.join('teacher');
 			socket.to('student').emit('who');
 			socket.on('create-link', (data, fn) => {
+				if(typeof data !== 'string' || typeof fn !== 'function') return;
 				fn(crypto.createHmac('sha256', SALT).update(data).digest('hex').substr(0,5));
 			});
 			socket.on('highQuality', (id, b) => {
+				if(typeof id !== 'string' || typeof b !== 'boolean') return;
 				socket.to(id).emit('highQuality', b);
 			})
 			fn(true);
@@ -56,6 +58,7 @@ io.on('connect', socket => {
 			socket.join('student');
 			socket.to('teacher').emit('student-connect', socket.id, socket.name);
 			socket.on('screenshot', data => {
+				if(typeof data !== 'string') return;
 				socket.to('teacher').emit('screenshot', socket.id, data);
 			});
 			socket.on('disconnect', () => {

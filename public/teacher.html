@@ -163,11 +163,13 @@
 		
 		document.getElementById('createLink').addEventListener('click', function() {
 			let name = prompt("Nom de l'élève ?",'');
-			socket.emit('create-link', name, function(r){
-			let hashIndex = location.href.indexOf('#');
-			let URL = hashIndex == -1 ? location.href.substr(0, location.href.length - 12) : location.href.substr(0, hashIndex - 12); // 12 = "teacher.html".length
-				prompt('Lien à donner :', URL + "student.html#" + /*encodeURIComponent*/(name) + "/" + r);
-			});
+			if(name) {
+				socket.emit('create-link', name, function(r){
+					let hashIndex = location.href.indexOf('#');
+					let URL = hashIndex == -1 ? location.href.substr(0, location.href.length - 12) : location.href.substr(0, hashIndex - 12); // 12 = "teacher.html".length
+					prompt('Lien à donner :', URL + "student.html#" + /*encodeURIComponent*/(name) + "/" + r);
+				});
+			}
 		});
 
 		setInterval(function(){ // On affiche en rouge les clients connectés qui n'ont pas envoyés de nouveaux screenshots
