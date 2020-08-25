@@ -50,9 +50,9 @@ Remarque : votre application pourra être utilisé gratuitement 550 heures par m
 
 ## Utilisation
 
-- Rendez-vous sur l'interface professeur (si l'interface prof ne s'affiche pas, patientez 1 minute puis réactualisez : l'application est en veille est à besoin d'un peu de temps pour se relancer)
+- Rendez-vous sur l'interface professeur (si l'interface prof ne s'affiche pas, patientez 1 minute puis réactualisez : Heroku a mis l'application en veille et a besoin d'un peu de temps pour la relancer)
 
-- Cliquez sur le bouton Créer lien, saisissez le nom de l'élève par exemple `Pierre Dupont (3B)` puis validez. Un lien s'affiche : demandez alors à l'élève en question d'accéder à ce lien (en lui envoyant le lien par email par exemple). Faites de même pour chacun de vos élèves. Il est conseillé de demandé aux élèves d'enregistrer le lien dans leur marque-page pour pouvoir y accéder plus rapidement.
+- Cliquez sur le bouton Créer lien, saisissez le nom de l'élève par exemple `Pierre Dupont (3B)` puis validez. Un lien s'affiche : demandez alors à l'élève en question d'accéder à ce lien (en lui envoyant le lien par email par exemple). Faites de même pour chacun de vos élèves. Il est conseillé de demander aux élèves d'enregistrer le lien dans leur marque-page pour pouvoir y accéder plus rapidement.
 
 - L'élève arrive alors sur une page où on lui demande de cliquer pour partager son écran. Après un clic, le navigateur internet lui demande ce qu'il souhaite partager.
 
