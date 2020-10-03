@@ -86,7 +86,7 @@
 				srcH = videoElem.srcObject.getVideoTracks()[0].getSettings().height;
 				srcW = videoElem.srcObject.getVideoTracks()[0].getSettings().width;
 
-				setInterval(takepicture, CONFIG.interval);
+				takepicture();
 				started = true;
 			}
 		}
@@ -126,6 +126,7 @@
 		}
 		//}, 50);
 
+		setTimeout(takepicture, CONFIG.interval);
 	}
 	
 	document.body.addEventListener('click', connect);
