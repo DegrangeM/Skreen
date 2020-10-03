@@ -49,6 +49,11 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+
+		var CONFIG = {
+			checkConnectDelay: 8000, // Temps à partir duquel la non réception d'une capture est considérée comme une erreur
+			checkConnectInterval: 10000 // Intervalle entre deux vérifications du dernier envoie des élèves 
+		}
  
 		
 		const socket = io();
@@ -174,13 +179,13 @@
 
 		setInterval(function(){ // On affiche en rouge les clients connectés qui n'ont pas envoyés de nouveaux screenshots
 			document.querySelectorAll('#screens > div').forEach(function(s){
-				if (s.getAttribute('data-time') && s.getAttribute('data-time') < new Date().getTime() - 8000) {
+				if (s.getAttribute('data-time') && s.getAttribute('data-time') < new Date().getTime() - CONFIG.checkConnectDelay) {
 					s.style.background = 'red';
 				} else {
 					s.style.background = null;
 				}
 			});
-		},10000);
+		}, CONFIG.checkConnectInterval);
 		
     </script>
 </body>
