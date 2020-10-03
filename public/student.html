@@ -46,6 +46,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
 	
+	var CONFIG = {
+		interval: 2000, // temps entre deux captures
+		maxSize: 500, // hauteur / largeur maximale de la capture
+		forceScreen: true, // oblige l'élève à partager son écran en entier
+	};
+
 	var socket;
 	
 	var displayMediaOptions = {
@@ -71,7 +77,7 @@
 			
 			const videoTrack = videoElem.srcObject.getVideoTracks()[0];
 		 
-			if(videoTrack.getSettings().displaySurface !== "monitor" && videoTrack.label !== "Primary Monitor") {
+			if(CONFIG.forceScreen && videoTrack.getSettings().displaySurface !== "monitor" && videoTrack.label !== "Primary Monitor") {
 				alert("Vous devez choisir de partager l'écran en entier et non pas juste une fenêtre / application / onglet.");
 				location.reload();
 			}
@@ -80,7 +86,7 @@
 				srcH = videoElem.srcObject.getVideoTracks()[0].getSettings().height;
 				srcW = videoElem.srcObject.getVideoTracks()[0].getSettings().width;
 
-				setInterval(takepicture,2000);
+				setInterval(takepicture, CONFIG.interval);
 				started = true;
 			}
 		}
@@ -94,9 +100,9 @@
 		if(highQuality) {
 			outH = srcH;
 			outW = srcW;
-		} else { // le plus grand fait 1000, l'autre s'adapte.
-			outH = parseInt(srcH * 1000/Math.max(srcH,srcW));
-			outW = parseInt(srcW * 1000/Math.max(srcH,srcW));
+		} else { // le plus grand fait CONFIG.maxSize, l'autre s'adapte.
+			outH = parseInt(srcH * CONFIG.maxSize/Math.max(srcH,srcW));
+			outW = parseInt(srcW * CONFIG.maxSize/Math.max(srcH,srcW));
 		}
 			
 			canvas.width = outW;
