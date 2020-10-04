@@ -9,6 +9,8 @@ app.use(express.static('public'));
 const SALT = process.env.SALT === undefined ? '2j3dWJRwFkG3v3U9' : process.env.SALT;
 const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? 'N7ykH8SMA8pvz4F5' : process.env.TEACHER_PASSWORD;
 const PORT = process.env.PORT === undefined ? 3000 : process.env.PORT;
+const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? 2000 : process.env.SCREEN_INTERVAL;
+const MAX_SIZE = process.env.MAX_SIZE === undefined ? 500 : process.env.MAX_SIZE;
 
 /*
 app.get('/', (req, res) => {
@@ -57,8 +59,9 @@ io.on('connect', socket => {
 			socket.name = name;
 			socket.join('student');
 			socket.to('teacher').emit('student-connect', socket.id, socket.name);
-			socket.on('screenshot', data => {
-				if(typeof data !== 'string') return;
+			socket.on('screenshot', (data, fn) => {
+				if(typeof data !== 'string' || typeof fn !== 'function') return;
+				fn();
 				socket.to('teacher').emit('screenshot', socket.id, data);
 			});
 			socket.on('disconnect', () => {
@@ -67,7 +70,10 @@ io.on('connect', socket => {
 			socket.on('here', () => {
 				socket.to('teacher').emit('here', socket.id, socket.name);
 			});
-			fn(true);
+			fn(true, {
+				interval: SCREEN_INTERVAL,
+				maxSize: MAX_SIZE
+			});
 		} else {
 			fn(false);
 		}
