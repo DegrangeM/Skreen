@@ -49,6 +49,7 @@
 	var CONFIG = {
 		interval: 2000, // temps entre deux captures, défini dans index.js
 		maxSize: 500, // hauteur / largeur maximale de la capture, défini dans index.js
+		compression: 15, // compression regroupant par X chaque composante couleur, défini dans index.js
 		forceScreen: true, // oblige l'élève à partager son écran en entier
 	};
 
@@ -109,7 +110,21 @@
 			canvas.height = outH;
 		//canvas.style.visibility = 'hidden'; // On évite les boucles
 		//setTimeout(function(){
+
 		context.drawImage(videoElem, 0, 0, outW, outH);
+
+		if (CONFIG.compression > 1) { // On compresse l'image
+			let screenData = context.getImageData(0, 0, canvas.width, canvas.height);
+			for (let i = 0; i < screenData.data.length; i+= 4) {
+				screenData.data[i] = Math.min(Math.round(screenData.data[i]/CONFIG.compression)*CONFIG.compression, 255);
+				screenData.data[i+1] = Math.min(Math.round(screenData.data[i+1]/CONFIG.compression)*CONFIG.compression, 255);
+				screenData.data[i+2] = Math.min(Math.round(screenData.data[i+2]/CONFIG.compression)*CONFIG.compression, 255);
+			}
+			context.putImageData(screenData, 0, 0);
+		}
+
+		var data = canvas.toDataURL('image/png');
+
 		//canvas.style.visibility = 'visible';
 
 		if(videoElem.srcObject.active) {
@@ -146,6 +161,7 @@
 				if(r) {
 					CONFIG.interval = c.interval;
 					CONFIG.maxSize = c.maxSize;
+					CONFIG.compression = c.compression;
 					startCapture();
 				} else {
 					alert("Erreur d'authentification. Il y a une faute de frappe dans le lien élève.");
