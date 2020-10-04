@@ -12,7 +12,7 @@ const CONFIG = {
 	PORT: 3000,
 	SCREEN_INTERVAL: 2000, // Temps entre deux captures
 	MAX_SIZE: 500, // Hauteur / Largeur maximale de la capture en mode normal
-	COMPRESSION: 15, // Compression de l'image (entier entre 2 et 255). Saisir 1 pour désactiver la compression
+	QUALITY: 0.5, // Qualité de l'image (entre 0 et 1)
 }
 
 // On remplace la configuration par les valeurs saisies sur Heroku
@@ -21,7 +21,7 @@ const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? CONFIG.TEA
 const PORT = process.env.PORT === undefined ? CONFIG.PORT : process.env.PORT;
 const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? CONFIG.SCREEN_INTERVAL : process.env.SCREEN_INTERVAL;
 const MAX_SIZE = process.env.MAX_SIZE === undefined ? CONFIG.MAX_SIZE : process.env.MAX_SIZE;
-const COMPRESSION = process.env.COMPRESSION === undefined ? CONFIG.COMPRESSION : process.env.COMPRESSION;
+const QUALITY = process.env.QUALITY === undefined ? CONFIG.QUALITY : process.env.QUALITY;
 
 /*
 app.get('/', (req, res) => {
@@ -84,7 +84,7 @@ io.on('connect', socket => {
 			fn(true, {
 				interval: SCREEN_INTERVAL,
 				maxSize: MAX_SIZE,
-				compression: COMPRESSION
+				quality: QUALITY
 			});
 		} else {
 			fn(false);
