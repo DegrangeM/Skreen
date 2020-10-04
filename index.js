@@ -6,11 +6,22 @@ const crypto = require('crypto');
 
 app.use(express.static('public'));
 
-const SALT = process.env.SALT === undefined ? '2j3dWJRwFkG3v3U9' : process.env.SALT;
-const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? 'N7ykH8SMA8pvz4F5' : process.env.TEACHER_PASSWORD;
-const PORT = process.env.PORT === undefined ? 3000 : process.env.PORT;
-const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? 2000 : process.env.SCREEN_INTERVAL;
-const MAX_SIZE = process.env.MAX_SIZE === undefined ? 500 : process.env.MAX_SIZE;
+const CONFIG = {
+	SALT: '2j3dWJRwFkG3v3U9',
+	TEACHER_PASSWORD: 'N7ykH8SMA8pvz4F5',
+	PORT: 3000,
+	SCREEN_INTERVAL: 2000, // Temps entre deux captures
+	MAX_SIZE: 500, // Hauteur / Largeur maximale de la capture en mode normal
+	COMPRESSION: 15, // Compression de l'image (entier entre 2 et 255). Saisir 1 pour désactiver la compression
+}
+
+// On remplace la configuration par les valeurs saisies sur Heroku
+const SALT = process.env.SALT === undefined ? CONFIG.SALT : process.env.SALT;
+const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? CONFIG.TEACHER_PASSWORD : process.env.TEACHER_PASSWORD;
+const PORT = process.env.PORT === undefined ? CONFIG.PORT : process.env.PORT;
+const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? CONFIG.SCREEN_INTERVAL : process.env.SCREEN_INTERVAL;
+const MAX_SIZE = process.env.MAX_SIZE === undefined ? CONFIG.MAX_SIZE : process.env.MAX_SIZE;
+const COMPRESSION = process.env.COMPRESSION === undefined ? CONFIG.COMPRESSION : process.env.COMPRESSION;
 
 /*
 app.get('/', (req, res) => {
@@ -25,7 +36,7 @@ app.get('/student', (req, res) => {
 */
 
 http.listen(PORT, () => {
-  console.log('go to http://localhost:3000');
+  console.log('go to http://localhost:3000/teacher.html#' + TEACHER_PASSWORD);
 });
 
 
@@ -72,7 +83,8 @@ io.on('connect', socket => {
 			});
 			fn(true, {
 				interval: SCREEN_INTERVAL,
-				maxSize: MAX_SIZE
+				maxSize: MAX_SIZE,
+				compression: COMPRESSION
 			});
 		} else {
 			fn(false);

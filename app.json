@@ -20,6 +20,10 @@
 		"MAX_SIZE": {
 		  "description": "Hauteur / Largeur maximale de la capture en mode normal.",
 		  "value": "500"
+		},
+		"COMPRESSION": {
+		  "description": "Compression de l'image (entier entre 2 et 255). Saisir 1 pour désactiver la compression.",
+		  "value": "15"
 		}
 	}
 }
