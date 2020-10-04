@@ -12,6 +12,14 @@
 		"TEACHER_PASSWORD": {
 		  "description": "Mot de passe pour accéder à l'interface prof.",
 		  "generator": "secret"
+		},
+		"SCREEN_INTERVAL": {
+		  "description": "Temps entre deux captures.",
+		  "value": "2000"
+		},
+		"MAX_SIZE": {
+		  "description": "Hauteur / Largeur maximale de la capture en mode normal.",
+		  "generator": "500"
 		}
 	}
 }
