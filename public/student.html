@@ -47,8 +47,8 @@
     <script>
 	
 	var CONFIG = {
-		interval: 2000, // temps entre deux captures
-		maxSize: 500, // hauteur / largeur maximale de la capture
+		interval: 2000, // temps entre deux captures, défini dans index.js
+		maxSize: 500, // hauteur / largeur maximale de la capture, défini dans index.js
 		forceScreen: true, // oblige l'élève à partager son écran en entier
 	};
 
@@ -116,9 +116,13 @@
 			var data = canvas.toDataURL('image/png');
 			if(data != lastScreen) {
 				lastScreen = data;
-				socket.emit('screenshot', data);
+				socket.emit('screenshot', data, function() {
+					setTimeout(takepicture, CONFIG.interval);
+				});
 			} else {
-				socket.emit('screenshot', 'afk');
+				socket.emit('screenshot', 'afk', function() {
+					setTimeout(takepicture, CONFIG.interval);
+				});
 			}
 		} else {
 			document.body.style.background = 'red';
@@ -126,7 +130,6 @@
 		}
 		//}, 50);
 
-		setTimeout(takepicture, CONFIG.interval);
 	}
 	
 	document.body.addEventListener('click', connect);
@@ -139,8 +142,10 @@
 		socket = io();
 
 		socket.on('connect', () => {
-			socket.emit('student', location.hash, function(r){
+			socket.emit('student', location.hash, function(r, c){
 				if(r) {
+					CONFIG.interval = c.interval;
+					CONFIG.maxSize = c.maxSize;
 					startCapture();
 				} else {
 					alert("Erreur d'authentification. Il y a une faute de frappe dans le lien élève.");
