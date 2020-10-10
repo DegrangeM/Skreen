@@ -169,10 +169,13 @@
 		document.getElementById('createLink').addEventListener('click', function() {
 			let name = prompt("Nom de l'élève ?",'');
 			if(name) {
-				socket.emit('create-link', name, function(r){
+				socket.emit('create-link', name, function(r) {
 					let hashIndex = location.href.indexOf('#');
 					let URL = hashIndex == -1 ? location.href.substr(0, location.href.length - 12) : location.href.substr(0, hashIndex - 12); // 12 = "teacher.html".length
-					prompt('Lien à donner :', URL + "student.html#" + /*encodeURIComponent*/(name) + "/" + r);
+					let links = r.map(function(name) {
+						return URL + "student.html#" + /*encodeURIComponent*/(name);
+					});
+					prompt('Lien à donner :', links.join('\n'));
 				});
 			}
 		});

@@ -48,7 +48,10 @@ io.on('connect', socket => {
 			socket.to('student').emit('who');
 			socket.on('create-link', (data, fn) => {
 				if(typeof data !== 'string' || typeof fn !== 'function') return;
-				fn(crypto.createHmac('sha256', SALT).update(data).digest('hex').substr(0,5));
+				let names = data.trim().split(/[\r\n]+/).map(function(name) {
+					return name + '/' + crypto.createHmac('sha256', SALT).update(name).digest('hex').substr(0,5)
+				});
+				fn(names);
 			});
 			socket.on('highQuality', (id, b) => {
 				if(typeof id !== 'string' || typeof b !== 'boolean') return;
