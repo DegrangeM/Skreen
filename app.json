@@ -17,6 +17,10 @@
 		  "description": "Temps entre deux captures.",
 		  "value": "2000"
 		},
+		"SCREEN_INTERVALHQ": {
+		  "description": "Temps entre deux captures en mode HQ (plein écran).",
+		  "value": "2000"
+		},
 		"MAX_SIZE": {
 		  "description": "Hauteur / Largeur maximale de la capture en mode normal.",
 		  "value": "500"

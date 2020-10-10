@@ -48,6 +48,7 @@
 	
 	var CONFIG = {
 		interval: 2000, // temps entre deux captures, défini dans index.js
+		intervalHQ: 2000, // temps entre deux captures en mode HQ, défini dans index.js
 		maxSize: 500, // hauteur / largeur maximale de la capture, défini dans index.js
 		quality: 0.5, // qualité de l'image, défini dans index.js
 		qualityHQ: 0.5, // qualité de l'image en mode HQ, défini dans index.js
@@ -121,11 +122,11 @@
 			if(data != lastScreen) {
 				lastScreen = data;
 				socket.emit('screenshot', data, function() {
-					setTimeout(takepicture, CONFIG.interval);
+					setTimeout(takepicture, highQuality ? CONFIG.intervalHQ : CONFIG.interval);
 				});
 			} else {
 				socket.emit('screenshot', 'afk', function() {
-					setTimeout(takepicture, CONFIG.interval);
+					setTimeout(takepicture, highQuality ? CONFIG.intervalHQ : CONFIG.interval);
 				});
 			}
 		} else {
@@ -149,6 +150,7 @@
 			socket.emit('student', location.hash, function(r, c){
 				if(r) {
 					CONFIG.interval = c.interval;
+					CONFIG.intervalHQ = c.intervalHQ;
 					CONFIG.maxSize = c.maxSize;
 					CONFIG.quality = c.quality;
 					CONFIG.qualityHQ = c.qualityHQ;

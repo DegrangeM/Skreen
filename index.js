@@ -11,6 +11,7 @@ const CONFIG = {
 	TEACHER_PASSWORD: 'N7ykH8SMA8pvz4F5',
 	PORT: 3000,
 	SCREEN_INTERVAL: 2000, // Temps entre deux captures
+	SCREEN_INTERVALHQ: 2000, // Temps entre deux captures en mode HQ (plein écran)
 	MAX_SIZE: 500, // Hauteur / Largeur maximale de la capture en mode normal
 	QUALITY: 0.5, // Qualité de l'image (entre 0 et 1)
 	QUALITYHQ: 0.5, // Qualité de l'image en mode HQ (plein écran)
@@ -21,6 +22,7 @@ const SALT = process.env.SALT === undefined ? CONFIG.SALT : process.env.SALT;
 const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? CONFIG.TEACHER_PASSWORD : process.env.TEACHER_PASSWORD;
 const PORT = process.env.PORT === undefined ? CONFIG.PORT : process.env.PORT;
 const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? CONFIG.SCREEN_INTERVAL : process.env.SCREEN_INTERVAL;
+const SCREEN_INTERVALHQ = process.env.SCREEN_INTERVALHQ === undefined ? CONFIG.SCREEN_INTERVALHQ : process.env.SCREEN_INTERVALHQ;
 const MAX_SIZE = process.env.MAX_SIZE === undefined ? CONFIG.MAX_SIZE : process.env.MAX_SIZE;
 const QUALITY = process.env.QUALITY === undefined ? CONFIG.QUALITY : parseFloat(process.env.QUALITY);
 const QUALITYHQ = process.env.QUALITYHQ === undefined ? CONFIG.QUALITYHQ : parseFloat(process.env.QUALITYHQ);
@@ -88,6 +90,7 @@ io.on('connect', socket => {
 			});
 			fn(true, {
 				interval: SCREEN_INTERVAL,
+				intervalHQ: SCREEN_INTERVALHQ,
 				maxSize: MAX_SIZE,
 				quality: QUALITY,
 				qualityHQ: QUALITYHQ
