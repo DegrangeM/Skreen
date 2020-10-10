@@ -24,6 +24,10 @@
 		"QUALITY": {
 		  "description": "Qualité de l'image (entre 0 et 1)",
 		  "value": "0.5"
+		},
+		"QUALITYHQ": {
+		  "description": "Qualité de l'image en mode HQ (plein écran)",
+		  "value": "0.5"
 		}
 	}
 }

@@ -13,6 +13,7 @@ const CONFIG = {
 	SCREEN_INTERVAL: 2000, // Temps entre deux captures
 	MAX_SIZE: 500, // Hauteur / Largeur maximale de la capture en mode normal
 	QUALITY: 0.5, // Qualité de l'image (entre 0 et 1)
+	QUALITYHQ: 0.5, // Qualité de l'image (entre 0 et 1)
 }
 
 // On remplace la configuration par les valeurs saisies sur Heroku
@@ -22,6 +23,7 @@ const PORT = process.env.PORT === undefined ? CONFIG.PORT : process.env.PORT;
 const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? CONFIG.SCREEN_INTERVAL : process.env.SCREEN_INTERVAL;
 const MAX_SIZE = process.env.MAX_SIZE === undefined ? CONFIG.MAX_SIZE : process.env.MAX_SIZE;
 const QUALITY = process.env.QUALITY === undefined ? CONFIG.QUALITY : process.env.QUALITY;
+const QUALITYHQ = process.env.QUALITYHQ === undefined ? CONFIG.QUALITYHQ : process.env.QUALITYHQ;
 
 /*
 app.get('/', (req, res) => {
@@ -87,7 +89,8 @@ io.on('connect', socket => {
 			fn(true, {
 				interval: SCREEN_INTERVAL,
 				maxSize: MAX_SIZE,
-				quality: QUALITY
+				quality: QUALITY,
+				qualityHQ: QUALITYHQ
 			});
 		} else {
 			fn(false);
