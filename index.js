@@ -13,7 +13,7 @@ const CONFIG = {
 	SCREEN_INTERVAL: 2000, // Temps entre deux captures
 	MAX_SIZE: 500, // Hauteur / Largeur maximale de la capture en mode normal
 	QUALITY: 0.5, // Qualité de l'image (entre 0 et 1)
-	QUALITYHQ: 0.5, // Qualité de l'image (entre 0 et 1)
+	QUALITYHQ: 0.5, // Qualité de l'image en mode HQ (plein écran)
 }
 
 // On remplace la configuration par les valeurs saisies sur Heroku
