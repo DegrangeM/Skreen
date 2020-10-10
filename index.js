@@ -22,8 +22,8 @@ const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD === undefined ? CONFIG.TEA
 const PORT = process.env.PORT === undefined ? CONFIG.PORT : process.env.PORT;
 const SCREEN_INTERVAL = process.env.SCREEN_INTERVAL === undefined ? CONFIG.SCREEN_INTERVAL : process.env.SCREEN_INTERVAL;
 const MAX_SIZE = process.env.MAX_SIZE === undefined ? CONFIG.MAX_SIZE : process.env.MAX_SIZE;
-const QUALITY = process.env.QUALITY === undefined ? CONFIG.QUALITY : process.env.QUALITY;
-const QUALITYHQ = process.env.QUALITYHQ === undefined ? CONFIG.QUALITYHQ : process.env.QUALITYHQ;
+const QUALITY = process.env.QUALITY === undefined ? CONFIG.QUALITY : parseFloat(process.env.QUALITY);
+const QUALITYHQ = process.env.QUALITYHQ === undefined ? CONFIG.QUALITYHQ : parseFloat(process.env.QUALITYHQ);
 
 /*
 app.get('/', (req, res) => {
