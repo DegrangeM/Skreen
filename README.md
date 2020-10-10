@@ -74,4 +74,6 @@ Remarque : votre application pourra être utilisé gratuitement 550 heures par m
 
 - Lorsque l'élève est inactif (c'est à dire que l'écran de l'élève n'a pas changé) depuis 2 minutes, son écran est placé en fin de la liste et est grisé. De plus, dès 30s d'inactivité, un chronomètre s'affiche pour indiquer depuis combien de temps l'élève est inactif.
 
+- Vous avez la possibilité de générer plusieurs lien à la fois, il vous suffit de construire sur un tableur la liste des élèves (avec un élève par ligne) et de copier coller la colonne. Il vous suffira alors de coller sur le tableur le résultat obtenu.
+
 - Vous pouvez héberger manuellement l'application en dehors de Heroku si vous en avez les compétences. Votre serveur devra avoir nodejs d'installé et l'application pourra être lancée par la commande `node index.js`. Pensez à téléchager les modules avec `npm install` et à changer les valeurs par défaut de `SALT`et `TEACHER_PASSWORD` dans le fichier `index.js`. Pensez à changer le port (3000 par défaut) si besoin.
