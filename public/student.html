@@ -97,7 +97,7 @@
 
 	canvas = document.getElementById('canvas');
 
-	function takepicture() {
+	function takepicture(timeout = true) {
 		var context = canvas.getContext('2d');
 
 		if(highQuality) {
@@ -122,11 +122,11 @@
 			if(data != lastScreen) {
 				lastScreen = data;
 				socket.emit('screenshot', data, function() {
-					setTimeout(takepicture, highQuality ? CONFIG.intervalHQ : CONFIG.interval);
+					if(timeout) setTimeout(takepicture, highQuality ? CONFIG.intervalHQ : CONFIG.interval);
 				});
 			} else {
 				socket.emit('screenshot', 'afk', function() {
-					setTimeout(takepicture, highQuality ? CONFIG.intervalHQ : CONFIG.interval);
+					if(timeout) setTimeout(takepicture, highQuality ? CONFIG.intervalHQ : CONFIG.interval);
 				});
 			}
 		} else {
@@ -168,6 +168,7 @@
 		});
 		socket.on('highQuality', (b) => {
 			highQuality = b;
+			takepicture(false);
 		});
 	}
 	
