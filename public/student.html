@@ -168,7 +168,7 @@
 		});
 		socket.on('highQuality', (b) => {
 			highQuality = b;
-			takepicture(false);
+			if(highQuality) takepicture(false);
 		});
 	}
 	
