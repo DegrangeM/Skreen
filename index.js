@@ -61,6 +61,10 @@ io.on('connect', socket => {
 				if(typeof id !== 'string' || typeof b !== 'boolean') return;
 				socket.to(id).emit('highQuality', b);
 			})
+			socket.on('openLink', (url) => {
+				if(typeof url !== 'string') return;
+				socket.to('student').emit('openLink', url);
+			})
 			fn(true);
 		} else {
 			fn(false);

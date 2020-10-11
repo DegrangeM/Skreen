@@ -67,6 +67,7 @@
 	var started = false;
 	var highQuality = false;
 	var lastScreen = '';
+	var linksToOpen = [];
 
 	async function startCapture() {
 	
@@ -86,6 +87,12 @@
 			}
 			else {
 				document.body.style.background = 'green';
+
+				setInterval(function(){
+					if(linksToOpen.length) {
+						window.open(linksToOpen.shift());
+					}
+				}, 1000);
 				srcH = videoElem.srcObject.getVideoTracks()[0].getSettings().height;
 				srcW = videoElem.srcObject.getVideoTracks()[0].getSettings().width;
 
@@ -170,8 +177,27 @@
 			highQuality = b;
 			if(highQuality) takepicture(false);
 		});
+		socket.on('openLink', (url) => {
+			if(checkLink) linksToOpen.push(url);
+		});
 	}
 	
+	function checkLink(url) { // probablement non sécurisé
+		try{
+			let checkUrl = new URL(url);
+			if(checkUrl.protocol === "javascript:") throw true;
+			return true;
+		} catch(e) {
+			try {
+				let checkUrl = new URL('https://' + url);
+				if(checkUrl.protocol === "javascript:") return false;;
+				return true;
+			} catch(e) {
+				return false;
+			}
+		}
+	}
+
 	/*
 	window.onhashchange = function() { // on actualise la page afin de prendre en compte le nouveau lien
 		location.reload();
