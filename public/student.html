@@ -133,17 +133,19 @@
 
 		lastImageData = context.getImageData(0, 0, outW, outH);
 
-		a=(canvas.toDataURL('image/jpeg', CONFIG.qualityHQ).length);
-		b=(canvas.toDataURL('image/jpeg', CONFIG.quality).length);
+		a=(canvas.toDataURL('image/webp', CONFIG.qualityHQ).length);
+		b=(canvas.toDataURL('image/webp', CONFIG.quality).length);
 		context.putImageData(imageData, 0, 0);
-		c=(canvas.toDataURL('image/jpeg', CONFIG.qualityHQ).length);
-		d=(canvas.toDataURL('image/jpeg', CONFIG.quality).length);
-		console.log(a,b,c,d,c/a,d/b);
+		c=(canvas.toDataURL('image/webp', CONFIG.qualityHQ).length);
+		d=(canvas.toDataURL('image/webp', CONFIG.quality).length);
+
+
+		// todo : prendre le plus efficace entre la version normale et la modifiée
 
 		//canvas.style.visibility = 'visible';
 
 		if(videoElem.srcObject.active) {
-			var data = canvas.toDataURL('image/jpeg', highQuality ? CONFIG.qualityHQ : CONFIG.quality);
+			var data = canvas.toDataURL('image/webp', highQuality ? CONFIG.qualityHQ : CONFIG.quality);
 			if(data != lastScreen) {
 				lastScreen = data;
 				socket.emit('screenshot', data, function() {
