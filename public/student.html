@@ -67,6 +67,7 @@
 	var started = false;
 	var highQuality = false;
 	var lastScreen = '';
+	var lastImageData = {data:[]};
 
 	async function startCapture() {
 	
@@ -114,6 +115,30 @@
 		//setTimeout(function(){
 
 		context.drawImage(videoElem, 0, 0, outW, outH);
+
+		imageData = context.getImageData(0, 0, outW, outH);
+
+		if(imageData.data.length === lastImageData.data.length) {
+			for(var i = 0 ; i < imageData.data.length ; i += 4) {
+				if(imageData.data[i] === 255 && imageData.data[i + 1] === 0 && imageData.data[i + 2] === 255) {
+					imageDat.data[i+1] = 1;
+				}
+				if(imageData.data[i] === lastImageData.data[i] && imageData.data[i + 1] === lastImageData.data[i + 1] && imageData.data[i + 2] === lastImageData.data[i + 2]) {
+					imageData.data[i] = 255;
+					imageData.data[i+1] = 0;
+					imageData.data[i+2] = 255;
+				}
+			}
+		}
+
+		lastImageData = context.getImageData(0, 0, outW, outH);
+
+		a=(canvas.toDataURL('image/jpeg', CONFIG.qualityHQ).length);
+		b=(canvas.toDataURL('image/jpeg', CONFIG.quality).length);
+		context.putImageData(imageData, 0, 0);
+		c=(canvas.toDataURL('image/jpeg', CONFIG.qualityHQ).length);
+		d=(canvas.toDataURL('image/jpeg', CONFIG.quality).length);
+		console.log(a,b,c,d,c/a,d/b);
 
 		//canvas.style.visibility = 'visible';
 
