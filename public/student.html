@@ -117,9 +117,6 @@
 		context.drawImage(videoElem, 0, 0, outW, outH);
 
 		imageData = context.getImageData(0, 0, outW, outH);
-		diff = '';
-		l = (imageData.data.length/4).toString(2).length;
-		L = (imageData.data.length + (255 << l) + (255 << l + 8) + (255 << l + 16).toString(36)).length;
 
 		if(imageData.data.length === lastImageData.data.length) {
 			for(var i = 0 ; i < imageData.data.length ; i += 4) {
@@ -130,14 +127,9 @@
 					imageData.data[i] = 255;
 					imageData.data[i+1] = 0;
 					imageData.data[i+2] = 255;
-				} else {
-					d = i/4 + (imageData[i] << l) + (imageData[i+1] << l + 8) + (imageData[i+2] << l + 16);
-					diff += d.toString(36).padStart(L, '0');
 				}
 			}
 		}
-
-		console.log(diff.length);
 
 		lastImageData = context.getImageData(0, 0, outW, outH);
 
@@ -146,8 +138,6 @@
 		context.putImageData(imageData, 0, 0);
 		c=(canvas.toDataURL('image/webp', CONFIG.qualityHQ).length);
 		d=(canvas.toDataURL('image/webp', CONFIG.quality).length);
-
-		console.log(d);
 
 
 		// todo : prendre le plus efficace entre la version normale et la modifiée
